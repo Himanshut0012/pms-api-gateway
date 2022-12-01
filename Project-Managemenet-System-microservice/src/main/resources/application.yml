@@ -1,0 +1,59 @@
+server:
+  port: 9090
+ 
+  
+eureka:
+  instance:
+    hostname: localhost
+    
+spring:
+  application:
+    name: pms-gateway
+  cloud:
+    config:
+      enabled: false
+    gateway:
+      routes:
+      - id: employee-microservice
+        uri: http://localhost:9011/
+        predicates:
+          - Path=/api/v1/employee/**
+      -  id: project-microservice
+         uri: http://localhost:9015/
+         predicates:
+          - Path=/api/v1/project/**
+      - id: project-billing
+        uri: http://localhost:9013/
+        predicates:
+          - Path=/api/v1/billing/**
+      - id: project-contributor
+        uri: http://localhost:9012/
+        predicates:
+        - Path=/api/v1/contributor/**
+      - id: project-status
+        uri: http://localhost:9014/
+        predicates:
+        - Path=/api/v1/status/**
+      - id: project-contributor
+        uri: http://localhost:9002/
+        predicates:
+        - Path=/api/v1/contributor/**
+      - id: project-billing
+        uri: http://localhost:9003/
+        predicates:
+        - Path=/api/v1/billing/**
+      - id: project-status
+        uri: http://localhost:9004/
+        predicates:
+        - Path=/api/v1/status/**
+      - id: project-microservice
+        uri: http://localhost:9005/
+        predicates:
+        - Path=/api/v1/project/**
+      - id: employee-microservice
+        uri: http://localhost:9001/
+        predicates:
+        - Path=/api/v1/employee/**
+      
+
+
